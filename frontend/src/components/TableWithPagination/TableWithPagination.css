@@ -1,0 +1,96 @@
+/* Основные стили таблицы */
+.table_blu table {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Стили для заголовка таблицы */
+.table_blu_title {
+    background: linear-gradient(to bottom, #ffffff 5%, #d1d1d1 100%);
+    padding: 5px;
+    border: none;
+    border-radius: 20px 5px;
+}
+
+/* Стили для заголовков столбцов */
+.table_blu_thead {
+    text-align: center;
+    background: linear-gradient(to bottom, #8CB5C2 5%, #1F2B2E 100%);
+    color: #FFFFFF;
+}
+
+.table_blu_thead tr th {
+    margin: 5px;
+    padding: 5px;
+}
+
+/* Стили для тела таблицы */
+.table_blu tbody tr td {
+    padding: 0 5px;
+}
+
+.table_blu tbody {
+    background: #cfd8e0;
+    text-align: left;
+    color: #001338;
+    border-collapse: collapse;
+}
+
+/* Стили для подвала таблицы */
+.table_blu tfoot tr td {
+    margin: 5px;
+    font-size: 12px;
+    background: #97a4aa;
+}
+
+/* Чередование строк и эффект при наведении */
+.table_blu table tbody tr:nth-child(2n) {
+    background: #d7e5ee;
+}
+
+.table_blu table tbody tr:hover {
+    background: #99cfc2;
+}
+
+/* Стили для пагинации */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.pagination-container button {
+    margin: 0 3px;
+    padding: 3px 8px;
+    border: 1px solid #ddd;
+    background: #f8f8f8;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.pagination-container button:hover {
+    background: #e0e0e0;
+}
+
+.pagination-container button.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination-container span {
+    margin: 0 5px;
+    padding: 3px 0;
+}
+
+.table_blu td.row-number {
+    text-align: center;
+    font-weight: bold;
+    background-color: #f8f9fa;
+}
+
+.table_blu th:first-child {
+    width: 50px;
+}

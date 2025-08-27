@@ -1,0 +1,94 @@
+/* App.css - только общие стили и управление фоном */
+
+/* Сброс стандартных отступов */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* App.css */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Увеличиваем z-index основного контента */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1; /* Выше размытого фона */
+}
+
+/* Альтернативный вариант для псевдоэлемента */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: blur(8px) brightness(0.8);
+  z-index: -1;
+}
+
+/* Явно задаем фон для каждого data-атрибута */
+body[data-page="root"]::before {
+  background-image: url('./images/backgrounds/root-bg.jpg');
+}
+
+body[data-page="admin"]::before {
+  background-image: url('./images/backgrounds/admin-bg.jpg');
+}
+
+body[data-page="user"]::before {
+  background-image: url('./images/backgrounds/user-bg.jpg');
+}
+
+body[data-page="Node-Schemas-Builder"]::before {
+  background-image: url('./images/backgrounds/Node_Schemas_Builder_dark_theme.jpeg');
+}
+
+body[data-page="Node-Builder"]::before {
+  background-image: url('./images/backgrounds/Node-Builder_dark_theme.jpeg');
+}
+
+
+/* Запасные варианты если images не загрузились */
+body.default-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Утилитарные классы для фонов */
+.bg-dark {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.bg-light {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+/* Убираем фон у body чтобы не дублировался */
+body {
+  background: none !important;
+  background-color: #f5f5f5; /* Только запасной цвет */
+}

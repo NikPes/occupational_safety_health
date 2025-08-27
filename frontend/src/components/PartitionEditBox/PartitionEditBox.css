@@ -1,0 +1,79 @@
+.form-group {
+    margin: 15px 0;
+    width: 100%;
+    padding: 0 15px;
+}
+
+.form-group label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #1a237e; /* Темно-синий цвет */
+    font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="date"]:focus,
+.form-group select:focus {
+    border-color: #23448c;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(35, 68, 140, 0.2);
+}
+
+/* Увеличенные поля на 10% */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"] {
+    width: 110%;
+    margin-left: -5%;
+}
+
+.form-group select {
+    width: 110%;
+    margin-left: -5%;
+    appearance: none;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSI2IDkgMTIgMTUgMTggOSI+PC9wb2x5bGluZT48L3N2Zz4=");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+/* Стили для чекбокса */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: auto;
+    transform: scale(1.2);
+}
+
+/* Стили для ошибок */
+.error-message {
+    color: #d32f2f;
+    font-size: 0.8em;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+.invalid {
+    border-color: #ff4444;
+    background-color: #fff9f9;
+}

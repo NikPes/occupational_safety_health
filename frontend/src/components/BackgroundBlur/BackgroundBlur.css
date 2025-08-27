@@ -1,0 +1,25 @@
+.background-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(10px) brightness(0.8);
+  z-index: -1;
+  transition: all 0.5s ease-in-out;
+}
+
+.background-blur[data-page="root"] {
+  background-image: url('./images/backgrounds/root-bg.jpg');
+}
+
+.background-blur[data-page="admin"] {
+  background-image: url('./images/backgrounds/admin-bg.jpg');
+}
+
+.background-blur[data-page="user"] {
+  background-image: url('./images/backgrounds/user-bg.jpg');
+}

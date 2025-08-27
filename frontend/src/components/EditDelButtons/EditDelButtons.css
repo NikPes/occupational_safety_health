@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./edit_del.woff2') format('woff2');
+}
+
+.edit-del-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #666;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Material Icons';
+    font-size: 24px;
+    line-height: 1;
+}
+
+.edit-btn:hover {
+    color: #0a79df;
+    transform: scale(1.1);
+}
+
+.delete-btn:hover {
+    color: #dc2a2a;
+    transform: scale(1.1);
+}
+
+/* Анимация "блеска" при наведении */
+.edit-btn:after, .delete-btn:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255,255,255,0.4) 50%,
+        transparent 100%
+    );
+    transform: skewX(-25deg);
+    transition: all 0.6s ease;
+}
+
+.edit-btn:hover:after, .delete-btn:hover:after {
+    left: 150%;
+}
+
+/* Анимация при нажатии */
+.edit-btn:active, .delete-btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}

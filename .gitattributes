@@ -1,0 +1,6 @@
+*.py merge=union
+*.js merge=union  
+*.jsx merge=union
+*.html merge=union
+*.css merge=union
+*.md merge=union

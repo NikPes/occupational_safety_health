@@ -1,0 +1,250 @@
+.node-library {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.library-header {
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+}
+
+.library-header h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.categories-list {
+  flex-shrink: 0;
+  border-bottom: 1px solid #e9ecef;
+  overflow-y: auto;
+  max-height: 40%;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.category-item:hover {
+  background-color: #f1f5f9;
+}
+
+.category-item.active {
+  background-color: #eff6ff;
+  border-left-color: #3b82f6 !important;
+}
+
+.category-icon {
+  font-size: 1.1rem;
+  margin-right: 0.75rem;
+  width: 20px;
+  text-align: center;
+}
+
+.category-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.category-count {
+  background: #e5e7eb;
+  color: #6b7280;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.nodes-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.node-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.node-item:hover {
+  border-color: #3b82f6;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.node-item.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.node-icon {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.node-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.node-name {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.node-description {
+  color: #6b7280;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.node-meta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.node-type {
+  background: #e5e7eb;
+  color: #4b5563;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.node-usage {
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+/* Темная тема */
+[data-theme="dark"] .node-library {
+  background: #1f2937;
+}
+
+[data-theme="dark"] .library-header {
+  background: #374151;
+  border-color: #4b5563;
+}
+
+[data-theme="dark"] .library-header h3 {
+  color: #f3f4f6;
+}
+
+[data-theme="dark"] .search-input {
+  background: #374151;
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+[data-theme="dark"] .search-input:focus {
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .categories-list {
+  border-color: #4b5563;
+}
+
+[data-theme="dark"] .category-item {
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .category-item:hover {
+  background-color: #374151;
+}
+
+[data-theme="dark"] .category-item.active {
+  background-color: #1e40af;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .category-count {
+  background: #4b5563;
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .node-item {
+  background: #374151;
+  border-color: #4b5563;
+}
+
+[data-theme="dark"] .node-item:hover {
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .node-item.selected {
+  background: #1e40af;
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .node-name {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .node-description {
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .node-type {
+  background: #4b5563;
+  color: #e5e7eb;
+}

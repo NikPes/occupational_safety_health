@@ -1,0 +1,11 @@
+# Пересборка и запуск
+docker-compose up --build
+
+# Запуск в фоновом режиме
+docker-compose up -d
+
+# Остановка
+docker-compose down
+
+# Просмотр логов
+docker-compose logs -f
