@@ -53,39 +53,41 @@ const LoginForm = ({ setToken }) => {
   };
 
   return (
-    <div className="wrapper">
-      <form onSubmit={handleSubmit}>
-        <h2>Вход в систему</h2>
+      <div className="Login_Form">
+        <div className="wrapper">
+          <form onSubmit={handleSubmit}>
+            <h2>Вход в систему</h2>
 
-        {error && <div className="error-message">{error}</div>}
+            {error && <div className="error-message">{error}</div>}
 
-        <div className="input-field">
-          <input
-            type="text"
-            name="user_login"
-            value={formData.user_login}
-            onChange={handleInputChange}
-            required
-          />
-          <label>Введите логин</label>
+            <div className="input-field">
+              <input
+                  type="text"
+                  name="user_login"
+                  value={formData.user_login}
+                  onChange={handleInputChange}
+                  required
+              />
+              <label>Введите логин</label>
+            </div>
+
+            <div className="input-field">
+              <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+              />
+              <label>Введите пароль</label>
+            </div>
+
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? 'Вход...' : 'Войти'}
+            </button>
+          </form>
         </div>
-
-        <div className="input-field">
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            required
-          />
-          <label>Введите пароль</label>
-        </div>
-
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Вход...' : 'Войти'}
-        </button>
-      </form>
-    </div>
+      </div>
   );
 };
 

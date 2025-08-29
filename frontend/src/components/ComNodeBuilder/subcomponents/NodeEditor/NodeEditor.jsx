@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './NodeEditor.css';
 
-const NodeEditor = ({ node, categories, onSave, onCreate }) => {
+const NodeEditor = ({ node,
+                      categories,
+                      onSave,
+                      onCreate,
+                      onNewNode,
+                      onDeleteNode,
+                      isEditing  }) => {
   const [formData, setFormData] = useState({
     name: '',
     type: '',
@@ -15,23 +21,21 @@ const NodeEditor = ({ node, categories, onSave, onCreate }) => {
     tags: []
   });
 
-  const [isEditing, setIsEditing] = useState(false);
-
   useEffect(() => {
     if (node) {
+      // Правильное извлечение данных из нода
       setFormData({
         name: node.name || '',
         type: node.type || '',
         category_id: node.category_id || '',
         description: node.description || '',
-        icon: node.data?.icon || '⚙️',
-        color: node.data?.color || '#6B7280',
-        inputs_schema: node.inputs_schema || [],
-        outputs_schema: node.outputs_schema || [],
+        icon: node.data?.icon || node.icon || '⚙️', // Проверяем оба места
+        color: node.data?.color || node.color || '#6B7280', // Проверяем оба места
+        inputs_schema: node.inputs_schema || node.data?.inputs_schema || [],
+        outputs_schema: node.outputs_schema || node.data?.outputs_schema || [],
         execution_logic: node.execution_logic || '',
         tags: node.tags || []
       });
-      setIsEditing(true);
     } else {
       setFormData({
         name: '',
@@ -45,7 +49,6 @@ const NodeEditor = ({ node, categories, onSave, onCreate }) => {
         execution_logic: '',
         tags: []
       });
-      setIsEditing(false);
     }
   }, [node]);
 
@@ -57,14 +60,21 @@ const NodeEditor = ({ node, categories, onSave, onCreate }) => {
     e.preventDefault();
     try {
       const nodeData = {
-        ...formData,
+        name: formData.name,
+        type: formData.type,
+        category_id: formData.category_id,
+        description: formData.description,
         data: {
           icon: formData.icon,
           color: formData.color
-        }
+        },
+        inputs_schema: formData.inputs_schema,
+        outputs_schema: formData.outputs_schema,
+        execution_logic: formData.execution_logic,
+        tags: formData.tags
       };
 
-      if (isEditing) {
+      if (isEditing && node) {
         await onSave(node.node_id, nodeData);
       } else {
         await onCreate(nodeData);
@@ -82,15 +92,71 @@ const NodeEditor = ({ node, categories, onSave, onCreate }) => {
       required: false
     };
 
-    handleInputChange(
-      type === 'input' ? 'inputs_schema' : 'outputs_schema',
-      [...formData[type === 'input' ? 'inputs_schema' : 'outputs_schema'], newPort]
-    );
+    if (type === 'input') {
+      setFormData(prev => ({
+        ...prev,
+        inputs_schema: [...prev.inputs_schema, newPort]
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        outputs_schema: [...prev.outputs_schema, newPort]
+      }));
+    }
   };
+
+  const removePort = (type, index) => {
+    const key = type === 'input' ? 'inputs_schema' : 'outputs_schema';
+    setFormData(prev => ({
+      ...prev,
+      [key]: prev[key].filter((_, i) => i !== index)
+    }));
+  };
+
+  const updatePort = (portType, index, field, value) => {
+    const key = portType === 'input' ? 'inputs_schema' : 'outputs_schema';
+    const updatedPorts = formData[key].map((port, i) =>
+      i === index ? { ...port, [field]: value } : port
+    );
+
+    setFormData(prev => ({ ...prev, [key]: updatedPorts }));
+  };
+
+  const renderPorts = (ports, type) => (
+      <div className="ports-list">
+        {ports.map((port, index) => (
+            <div key={port.id} className="port-item">
+              <input
+                  placeholder="Имя порта"
+                  value={port.name}
+                  onChange={(e) => updatePort(type, index, 'name', e.target.value)}
+              />
+              <select
+                  value={port.type}
+                  onChange={(e) => updatePort(type, index, 'type', e.target.value)}
+              >
+                <option value="string">String</option>
+                <option value="number">Number</option>
+                <option value="boolean">Boolean</option>
+                <option value="object">Object</option>
+                <option value="array">Array</option>
+              </select>
+              <button
+                  type="button"
+                  onClick={() => removePort(type, index)}
+                  className="btn-remove"
+                  title="Удалить порт"
+              >
+                ×
+              </button>
+            </div>
+        ))}
+      </div>
+  );
 
   return (
     <div className="node-editor">
-      <div className="editor-header">
+      <div className="builder-editor-header">
         <h3>{isEditing ? 'Редактирование нода' : 'Создание нода'}</h3>
       </div>
 
@@ -182,6 +248,7 @@ const NodeEditor = ({ node, categories, onSave, onCreate }) => {
               + Добавить
             </button>
           </div>
+          {renderPorts(formData.inputs_schema, 'input')}
 
           <div className="ports-header">
             <h4>Порты вывода</h4>
@@ -189,6 +256,7 @@ const NodeEditor = ({ node, categories, onSave, onCreate }) => {
               + Добавить
             </button>
           </div>
+          {renderPorts(formData.outputs_schema, 'output')}
         </div>
 
         <div className="form-section">
@@ -203,6 +271,24 @@ const NodeEditor = ({ node, categories, onSave, onCreate }) => {
         </div>
 
         <div className="form-actions">
+          <button
+            type="button"
+            onClick={onDeleteNode}
+            className="btn-danger"
+            disabled={!isEditing}
+            title={!isEditing ? "Выберите нод для удаления" : "Удалить нод"}
+          >
+            Удалить нод
+          </button>
+
+          <button
+            type="button"
+            onClick={onNewNode}
+            className="btn-new"
+          >
+            Новый нод
+          </button>
+
           <button type="submit" className="btn-primary">
             {isEditing ? 'Сохранить изменения' : 'Создать нод'}
           </button>

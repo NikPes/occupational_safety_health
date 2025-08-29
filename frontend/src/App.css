@@ -1,94 +1,66 @@
-/* App.css - только общие стили и управление фоном */
-
-/* Сброс стандартных отступов */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* App.css */
+/* App.css - альтернативная версия */
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #f5f5f5;
+  margin: 0;
+  min-height: 100vh;
+}
+
+body[data-page]::before {
+  content: '';
+  position: fixed;
+  top: -10px; /* Компенсация размытия */
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
-  min-height: 100vh;
-  position: relative;
+  filter: blur(3px);
+  z-index: -2;
 }
 
-/* Увеличиваем z-index основного контента */
-.App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 1; /* Выше размытого фона */
-}
-
-/* Альтернативный вариант для псевдоэлемента */
-body::before {
+body[data-page]::after {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  filter: blur(8px) brightness(0.8);
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   z-index: -1;
 }
 
-/* Явно задаем фон для каждого data-атрибута */
+/* Фоны для каждой страницы */
 body[data-page="root"]::before {
-  background-image: url('./images/backgrounds/root-bg.jpg');
+  background-image: url('/src/assets/images/backgrounds/root-bg.jpg');
 }
 
 body[data-page="admin"]::before {
-  background-image: url('./images/backgrounds/admin-bg.jpg');
+  background-image: url('/src/assets/images/backgrounds/admin-bg.jpg');
 }
 
 body[data-page="user"]::before {
-  background-image: url('./images/backgrounds/user-bg.jpg');
+  background-image: url('/src/assets/images/backgrounds/user-bg.jpg');
 }
 
-body[data-page="Node-Schemas-Builder"]::before {
-  background-image: url('./images/backgrounds/Node_Schemas_Builder_dark_theme.jpeg');
+body[data-page="Node_Schemas_Builder"]::before {
+  background-image: url('/src/assets/images/backgrounds/Node_Schemas_Builder_dark_theme.jpeg');
 }
 
-body[data-page="Node-Builder"]::before {
-  background-image: url('./images/backgrounds/Node-Builder_dark_theme.jpeg');
+body[data-page="Node_Builder"]::before {
+  background-image: url('/src/assets/images/backgrounds/Node-Builder_dark_theme.jpeg');
 }
 
-
-/* Запасные варианты если images не загрузились */
-body.default-bg {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* Темная прокрутка (для браузеров WebKit) */
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #2d2d2d;
 }
 
-/* Утилитарные классы для фонов */
-.bg-dark {
-  background-color: rgba(0, 0, 0, 0.8);
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 6px;
 }
 
-.bg-light {
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-left {
-  text-align: left;
-}
-
-/* Убираем фон у body чтобы не дублировался */
-body {
-  background: none !important;
-  background-color: #f5f5f5; /* Только запасной цвет */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
 }

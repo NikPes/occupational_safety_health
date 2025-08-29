@@ -10,6 +10,7 @@ from views.use_token_views import blu_use_token
 from views.body_construct_views import blu_body_construct
 from views.table_bd_views import blu_table_bd_views
 from views.node_builder_views import blu_node_builder
+from views.node_schemas_builder_views import blu_node_schemas_builder
 
 
 
@@ -26,12 +27,13 @@ def create_app():
     b_crypt.init_app(app)
     db.init_app(app)
 
-    app.register_blueprint(blu_login, url_prefix='/')
-    app.register_blueprint(blu_main_menu, url_prefix='/main_menu')
-    app.register_blueprint(blu_use_token, url_prefix='/use_token')
-    app.register_blueprint(blu_body_construct, url_prefix='/body_construct')
-    app.register_blueprint(blu_table_bd_views, url_prefix='/table_views')
-    app.register_blueprint(blu_node_builder, url_prefix='/node_builder')
+    app.register_blueprint(blu_login, url_prefix='/WorkOST')
+    app.register_blueprint(blu_main_menu, url_prefix='/WorkOST/main_menu')
+    app.register_blueprint(blu_use_token, url_prefix='/WorkOST/use_token')
+    app.register_blueprint(blu_body_construct, url_prefix='/WorkOST/body_construct')
+    app.register_blueprint(blu_table_bd_views, url_prefix='/WorkOST/table_views')
+    app.register_blueprint(blu_node_builder, url_prefix='/WorkOST/node_builder')
+    app.register_blueprint(blu_node_schemas_builder, url_prefix='/WorkOST/node_schemas_builder')
 
 
 

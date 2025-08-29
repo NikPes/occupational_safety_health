@@ -8,7 +8,8 @@ const NodeLibrary = ({
   selectedNode,
   onCategorySelect,
   onNodeSelect,
-  onSearch
+  onSearch,
+  token
 }) => {
   const [localSearch, setLocalSearch] = useState('');
 
@@ -20,6 +21,35 @@ const NodeLibrary = ({
 
   const handleCategoryClick = (categoryId) => {
     onCategorySelect(categoryId === selectedCategory ? null : categoryId);
+  };
+
+  const handleNodeClick = async (node) => {
+    try {
+      console.log('Fetching node details for:', node.node_id);
+
+      // Делаем запрос для получения полной информации о ноде
+      const response = await fetch(`/WorkOST/node_builder/nodes/${node.node_id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch node details');
+      }
+
+      const result = await response.json();
+      console.log('Node details received:', result.node);
+
+      // Передаем полные данные нода
+      onNodeSelect(result.node);
+
+    } catch (error) {
+      console.error('Error fetching node details:', error);
+      // Если запрос не удался, используем базовые данные
+      onNodeSelect(node);
+    }
   };
 
   return (
@@ -72,7 +102,7 @@ const NodeLibrary = ({
             <div
               key={node.node_id}
               className={`node-item ${selectedNode?.node_id === node.node_id ? 'selected' : ''}`}
-              onClick={() => onNodeSelect(node)}
+              onClick={() => handleNodeClick(node)} // Используем новую функцию
             >
               <div className="node-icon" style={{ color: node.color }}>
                 {node.icon}

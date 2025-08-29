@@ -1,0 +1,177 @@
+/* UnLogin.css */
+.UnLogin {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.UnLogin .menu {
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Стиль кнопки "Выход" - красный цвет */
+.UnLogin .menu-title {
+  display: block;
+  width: 160px; /* Фиксированная ширина для обоих элементов */
+  height: 40px;
+  padding: 12px 0 0;
+  background: #af0000;
+  text-align: center;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.3s background-color;
+  position: relative;
+}
+
+/* ВОССТАНАВЛИВАЕМ треугольник снизу кнопки */
+.UnLogin .menu-title:before {
+  content: "";
+  display: block;
+  height: 0;
+  border-top: 5px solid #af0000;
+  border-left: 80px solid transparent; /* Половина ширины кнопки (160px / 2) */
+  border-right: 80px solid transparent;
+  border-bottom: 0 solid #dddddd;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 101;
+  transition: 0.2s 0.2s border-top ease-out, 0.3s border-top-color;
+}
+
+.UnLogin .menu-title:hover {
+  background: #6e0000;
+}
+
+.UnLogin .menu-title:hover:before {
+  border-top-color: #6e0000;
+}
+
+.UnLogin .menu:hover .menu-title:before {
+  border-top-width: 0;
+  transition: 0.2s border-top-width ease-in, 0.3s border-top-color;
+}
+
+/* ВОССТАНАВЛИВАЕМ нижнюю границу кнопки */
+.UnLogin .menu-title:after {
+  content: "";
+  display: block;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 0 solid #ebebeb;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 101;
+  transition: 0.2s border-bottom ease-in;
+}
+
+.UnLogin .menu:hover .menu-title:after {
+  border-bottom-width: 5px;
+  transition: 0.2s 0.2s border-bottom-width ease-out;
+}
+
+/* Выпадающее меню - такая же ширина как кнопка */
+.UnLogin .menu-dropdown {
+  width: 160px; /* Такая же ширина как кнопка */
+  padding: 15px 0;
+  position: absolute;
+  background: #ebebeb;
+  z-index: 100;
+  transition: 0.5s padding, 0.5s background;
+  left: 0;
+  top: 100%;
+  margin-top: 0;
+}
+
+/* Треугольник для выпадающего меню */
+.UnLogin .menu-dropdown:after {
+  content: "";
+  display: block;
+  height: 0;
+  border-top: 5px solid #ebebeb;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 101;
+  transition: 0.5s border-top;
+}
+
+.UnLogin .menu:not(:hover) .menu-dropdown {
+  padding: 4px 0;
+  background: #dddddd;
+  z-index: 99;
+}
+
+.UnLogin .menu:not(:hover) .menu-dropdown:after {
+  border-top-color: #dddddd;
+}
+
+.UnLogin .menu:not(:hover) .menu-title:after {
+  border-bottom-color: #dddddd;
+}
+
+/* Пункты меню */
+.UnLogin .menu-dropdown li {
+  overflow: hidden;
+  height: 30px;
+  padding: 0;
+  background: rgba(0,0,0,0);
+  white-space: nowrap;
+  transition: 0.5s height cubic-bezier(.73,.32,.34,1.5),
+  0.5s padding cubic-bezier(.73,.32,.34,1.5),
+  0.5s margin cubic-bezier(.73,.32,.34,1.5),
+  0.5s 0.2s color,
+  0.2s background-color;
+  list-style: none;
+  color: #555555;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0;
+}
+
+.UnLogin .menu-dropdown li:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+.UnLogin .menu:not(:hover) .menu-dropdown li {
+  visibility: hidden;
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  color: rgba(25,25,25,0);
+  transition: 0.5s 0.1s height,
+  0.5s 0.1s padding,
+  0.5s 0.1s margin,
+  0.3s color,
+  0.6s visibility;
+  z-index: 99;
+}
+
+/* Стиль для текста в выпадающем меню */
+.UnLogin .menu-dropdown .menu-item {
+  width: 100%;
+  height: 30px;
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555555;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s background-color;
+  box-sizing: border-box;
+}
+
+.UnLogin .menu-dropdown .menu-item:hover {
+  background: #dddddd;
+  color: #333;
+}

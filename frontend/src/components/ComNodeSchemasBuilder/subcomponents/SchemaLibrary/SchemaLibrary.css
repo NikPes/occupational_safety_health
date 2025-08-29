@@ -1,0 +1,366 @@
+.schema-library {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  width: 100%;
+  overflow: hidden;
+}
+
+.library-header {
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+  position: relative;
+}
+
+.library-header h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.library-filters {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+}
+
+.filter-group {
+  margin-bottom: 0.75rem;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.4rem;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.filter-buttons button {
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #6b7280;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-buttons button:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.filter-buttons button.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+
+.filter-group label input[type="checkbox"] {
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+.library-stats {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 0.4rem;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.7rem;
+  color: #6b7280;
+  margin-bottom: 0.2rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3b82f6;
+}
+
+.schemas-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.schema-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  position: relative;
+}
+
+.schema-item:hover {
+  border-color: #3b82f6;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.schema-item.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.schema-icon {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.schema-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.schema-name {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.schema-description {
+  color: #6b7280;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.schema-meta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.schema-type {
+  background: #e5e7eb;
+  color: #4b5563;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.schema-nodes,
+.schema-edges {
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+.schema-author {
+  color: #9ca3af;
+  font-size: 0.7rem;
+  font-style: italic;
+}
+
+.schema-actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.3rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.schema-item:hover .schema-actions {
+  opacity: 1;
+}
+
+.btn-small {
+  padding: 0.2rem 0.4rem;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-duplicate {
+  background: #10b981;
+  color: white;
+}
+
+.btn-duplicate:hover {
+  background: #059669;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+/* Темная тема */
+[data-theme="dark"] .schema-library {
+  background: #1f2937;
+}
+
+[data-theme="dark"] .library-header {
+  background: #374151;
+  border-color: #4b5563;
+}
+
+[data-theme="dark"] .library-header h3 {
+  color: #f3f4f6;
+}
+
+[data-theme="dark"] .search-input {
+  background: #374151;
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+[data-theme="dark"] .search-input:focus {
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .library-filters {
+  background: #374151;
+  border-color: #4b5563;
+}
+
+[data-theme="dark"] .filter-buttons button {
+  background: #4b5563;
+  border-color: #6b7280;
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .filter-buttons button:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+[data-theme="dark"] .filter-buttons button.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .library-stats {
+  background: #374151;
+  border-color: #4b5563;
+}
+
+[data-theme="dark"] .stat-item {
+  background: #4b5563;
+  border-color: #6b7280;
+}
+
+[data-theme="dark"] .stat-label {
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .stat-value {
+  color: #93c5fd;
+}
+
+[data-theme="dark"] .schema-item {
+  background: #374151;
+  border-color: #4b5563;
+}
+
+[data-theme="dark"] .schema-item:hover {
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .schema-item.selected {
+  background: #1e40af;
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .schema-name {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .schema-description {
+  color: #d1d5db;
+}
+
+[data-theme="dark"] .schema-type {
+  background: #4b5563;
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .schema-nodes,
+[data-theme="dark"] .schema-edges {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .schema-author {
+  color: #9ca3af;
+}

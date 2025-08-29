@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import useToken  from '../UseToken/UseToken';
+import UseToken from '../UseToken/UseToken';
 import './ComNodeBuilder.css';
 
 // Subcomponents
-import NodeLibrary from './subcomponents/NodeLibrary/NodeLibrary.jsx';
-import NodeEditor from './subcomponents/NodeEditor/NodeEditor.jsx';
-import NodeProperties from './subcomponents/NodeProperties/NodeProperties.jsx';
-import NodePreview from './subcomponents/NodePreview/NodePreview.jsx';
+import NodeLibrary from './subcomponents/NodeLibrary/NodeLibrary';
+import NodeEditor from './subcomponents/NodeEditor/NodeEditor';
+import NodeProperties from './subcomponents/NodeProperties/NodeProperties';
+import NodePreview from './subcomponents/NodePreview/NodePreview';
 
 const ComNodeBuilder = ({
-  pageName = 'Node-Builder',
-  onNodeSelect,
-  onNodeCreate,
-  initialData = null
-}) => {
-  const { token } = useToken();
+                          pageName = 'node-builder',
+                          onNodeSelect,
+                          onNodeCreate,
+                          initialData = null
+                        }) => {
+  const { token } = UseToken();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
@@ -45,7 +45,6 @@ const ComNodeBuilder = ({
 
   const loadCategories = async () => {
     try {
-      console.log('NodeBuilder load categories:');
       const response = await fetch('/WorkOST/node_builder/categories', {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -101,6 +100,34 @@ const ComNodeBuilder = ({
     if (onNodeSelect) onNodeSelect(node);
   };
 
+  const handleNewNode = () => {
+    setSelectedNode(null);
+  };
+
+  const handleDeleteNode = async () => {
+    if (!selectedNode) return;
+
+    try {
+      const response = await fetch(`/WorkOST/node_builder/nodes/${selectedNode.node_id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) throw new Error('Failed to delete node');
+
+      setNodes(prev => prev.filter(node => node.node_id !== selectedNode.node_id));
+      setSelectedNode(null);
+
+      console.log('Node deleted successfully');
+    } catch (err) {
+      console.error('Node deletion error:', err);
+      alert('Ошибка при удалении нода');
+    }
+  };
+
   const handleNodeCreate = async (nodeData) => {
     try {
       const response = await fetch('/WorkOST/node_builder/nodes', {
@@ -117,9 +144,7 @@ const ComNodeBuilder = ({
       const result = await response.json();
       if (onNodeCreate) onNodeCreate(result.node);
 
-      // Перезагружаем список нодов
       await loadNodes(selectedCategory, searchQuery);
-
       return result;
     } catch (err) {
       console.error('Node creation error:', err);
@@ -140,7 +165,6 @@ const ComNodeBuilder = ({
 
       if (!response.ok) throw new Error('Failed to update node');
 
-      // Обновляем локальное состояние
       setNodes(prev => prev.map(node =>
         node.node_id === nodeId ? { ...node, ...nodeData } : node
       ));
@@ -178,9 +202,6 @@ const ComNodeBuilder = ({
     <div className="com-node-builder">
       <div className="node-builder-header">
         <h2>Конструктор нодов</h2>
-        <div className="header-actions">
-          <button className="btn-primary">Новый нод</button>
-        </div>
       </div>
 
       <div className="node-builder-content">
@@ -194,6 +215,7 @@ const ComNodeBuilder = ({
             onCategorySelect={handleCategorySelect}
             onNodeSelect={handleNodeSelect}
             onSearch={handleSearch}
+            token={token}
           />
         </div>
 
@@ -204,6 +226,9 @@ const ComNodeBuilder = ({
             categories={categories}
             onSave={handleNodeUpdate}
             onCreate={handleNodeCreate}
+            onNewNode={handleNewNode}
+            onDeleteNode={handleDeleteNode}
+            isEditing={!!selectedNode}
           />
         </div>
 

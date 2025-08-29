@@ -10,6 +10,7 @@ import "./BodyConstruct.css"; // Импортируем стили
  */
 // Импортируем компоненты
 const ComTable = React.lazy(() => import('../ComTable/ComTable.jsx'));
+const ComNodeSchemasBuilder = React.lazy(() => import('../ComNodeSchemasBuilder/ComNodeSchemasBuilder.jsx'));
 const ComNodeBuilder = React.lazy(() => import('../ComNodeBuilder/ComNodeBuilder.jsx'));
 // const ComGraphics = React.lazy(() => import('../ComGraphics/ComGraphics.jsx'));
 // const ComConsole = React.lazy(() => import('../ComConsole/ComConsole.jsx'));
@@ -19,6 +20,7 @@ const ComNodeBuilder = React.lazy(() => import('../ComNodeBuilder/ComNodeBuilder
 const componentsMap = {
     ComTable,
     ComNodeBuilder,
+    ComNodeSchemasBuilder,
     // ComGraphics,
     // ComConsole,
     // IntelligenceWork,
@@ -100,11 +102,13 @@ function BodyConstruct(props) {
         <div className={props.pageName}>
             {pageStructure.map((item) => (
                 <div key={item.id} className={item.position_tab}>
-                    <h2>{item.table_name}</h2>
-                    <PageStructureItem item={item}
-                                       token={props.token}
-                                       table_name={item.table_name}
-                                       count_sheet={item.count_sheet} />
+                    <div className="PageStructureContainer">
+                        <h2>{item.table_name}</h2>
+                        <PageStructureItem item={item}
+                                           token={props.token}
+                                           table_name={item.table_name}
+                                           count_sheet={item.count_sheet} />
+                    </div>
                 </div>
             ))}
         </div>

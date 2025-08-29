@@ -59,7 +59,8 @@ class ActionNodeBuilder:
             height=data.get('height', 100.0),
             tags=data.get('tags', []),
             required_permission=data.get('required_permission', 0),
-            created_by=created_by
+            created_by=created_by,
+            created_at=datetime.now().isoformat()
         )
 
         db.session.add(node)

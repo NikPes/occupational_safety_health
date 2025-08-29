@@ -65,6 +65,8 @@ class ReactFlowNode(ParentModels):
 
     # Управление версиями
     version = db.Column(db.String(20), default='1.0.0')
+    updated_at = db.Column(db.DateTime)  # Последний изменение
+    created_at = db.Column(db.DateTime)  # Дата создание
     changelog = db.Column(db.Text)  # История изменений
     previous_versions = db.Column(db.JSON, default=list)  # Архив старых версий
     is_deprecated = db.Column(db.Boolean, default=False)  # Устаревший нод
@@ -82,8 +84,10 @@ class ReactFlowNode(ParentModels):
     created_by_rel = relationship("User", back_populates="created_nodes")
 
     master_order = [
-        'id', 'node_id', 'name', 'type', 'category_id', 'version',
-        'is_template', 'required_permission', 'usage_count', 'last_used'
+        'id', 'created_by', 'node_id', 'name', 'type', 'description', 'category_id', 'category_rel',
+        'data', 'inputs_schema', 'outputs_schema', 'execution_logic', 'width', 'height', 'version',
+        'updated_at', 'created_at', 'changelog', 'previous_versions', 'is_deprecated', 'is_template',
+        'tags', 'required_permission', 'usage_count', 'last_used', 'created_by_rel'
     ]
 
     per_page = 50
@@ -142,6 +146,8 @@ class ReactFlowSchema(ParentModels):
 
     # Версионность схемы
     version = db.Column(db.String(20), default='1.0.0')
+    updated_at = db.Column(db.DateTime)  # Последний изменение
+    created_at = db.Column(db.DateTime)  # Дата создание
     based_on_template = db.Column(db.String(50))  # UUID шаблона схемы
 
     # Статистика
@@ -154,9 +160,9 @@ class ReactFlowSchema(ParentModels):
     created_by_rel = relationship("User", back_populates="created_schemas")
 
     master_order = [
-        'id', 'name', 'is_template', 'is_public', 'required_permission',
-        'version', 'nodes_count', 'edges_count', 'last_executed',
-        'created_by', 'created_at', 'updated_at'
+        'id', 'name', 'description', 'flow_data', 'is_template', 'is_public', 'required_permission',
+        'version', 'updated_at', 'created_at', 'based_on_template', 'nodes_count', 'edges_count',
+        'last_executed', 'created_by', 'created_by_rel'
     ]
 
     per_page = 30

@@ -2,6 +2,7 @@ from flask import request, Blueprint, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 import backend.app.logic_model.node_builder_logic as node_build_log
+import backend.app.models.user_model as user_mod
 
 
 blu_node_builder = Blueprint('node_builder',
@@ -61,7 +62,9 @@ def get_nodes():
             'inputs_count': len(node.inputs_schema or []),
             'outputs_count': len(node.outputs_schema or []),
             'usage_count': node.usage_count,
-            'last_used': node.last_used.isoformat() if node.last_used else None
+            'last_used': node.last_used.isoformat() if node.last_used else None,
+            'created_at': node.created_at.isoformat() if node.created_at else None,
+            'updated_at': node.updated_at.isoformat() if node.updated_at else None
         } for node in nodes.items],
         "total": nodes.total,
         "pages": nodes.pages,
@@ -78,7 +81,6 @@ def get_node(node_id):
 
     if not node:
         return jsonify({"error": "Node not found"}), 404
-
     return jsonify({
         "node": {
             'id': node.id,
@@ -110,7 +112,7 @@ def get_node(node_id):
 @jwt_required()
 def create_node():
     """Создать новый нод"""
-    current_user_id = get_jwt_identity()
+    current_user = user_mod.User.query.filter_by(user_login=get_jwt_identity()).first()
     data = request.get_json()
 
     # Валидация обязательных полей
@@ -119,30 +121,30 @@ def create_node():
         if field not in data:
             return jsonify({"error": f"Missing required field: {field}"}), 400
 
-    try:
-        node = node_build_log.ActionNodeBuilder.create_node(data, current_user_id)
-        return jsonify({
-            "message": "Node created successfully",
-            "node_id": node.node_id,
-            "status": "success"
-        }), 201
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    # try:
+    node = node_build_log.ActionNodeBuilder.create_node(data, current_user.id)
+    return jsonify({
+        "message": "Node created successfully",
+        "node_id": node.node_id,
+        "status": "success"
+    }), 201
+    # except Exception as e:
+    #     return jsonify({"error": str(e)}), 500
 
 
 @blu_node_builder.route('/nodes/<string:node_id>', methods=['PUT'])
 @jwt_required()
 def update_node(node_id):
     """Обновить нод"""
-    current_user_id = get_jwt_identity()
+    current_user = user_mod.User.query.filter_by(user_login=get_jwt_identity()).first()
     data = request.get_json()
-
+    print()
     node = node_build_log.ActionNodeBuilder.get_node_by_id(node_id)
     if not node:
         return jsonify({"error": "Node not found"}), 404
 
     # Проверка прав доступа
-    if node.created_by != current_user_id:
+    if node.created_by != current_user.id:
         return jsonify({"error": "Access denied"}), 403
 
     try:

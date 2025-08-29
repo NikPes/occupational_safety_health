@@ -1,4 +1,5 @@
-.com-node-builder {
+/* frontend/src/components/ComNodeSchemasBuilder/ComNodeSchemasBuilder.css */
+.com-node-schemas-builder {
   width: 100%;
   height: 100%;
   display: flex;
@@ -6,37 +7,27 @@
   background: #f8f9fa;
 }
 
-.node-builder-header {
-  padding: 12px 16px;
+.schemas-builder-header {
+  padding: 1rem;
   border-bottom: 1px solid #dee2e6;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f8f9fa; /* Темный фон для контраста */
-  height: 60px;
-  box-sizing: border-box;
+  background: #ffffff;
 }
 
-/* Добавляем стили для заголовка */
-.node-builder-header h2 {
-  color: #2d3748; /* Белый текст */
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-.node-builder-content {
+.schemas-builder-content {
   flex: 1;
   display: grid;
-  grid-template-columns: 0.7fr 2.6fr 0.7fr;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 1rem;
   padding: 1rem;
   overflow: hidden;
 }
 
-.node-library-panel,
-.node-editor-panel,
-.node-properties-panel {
+.schema-library-panel,
+.schema-editor-panel,
+.schema-properties-panel {
   background: #ffffff;
   border-radius: 8px;
   border: 1px solid #dee2e6;
@@ -97,79 +88,40 @@
 
 /* Адаптивность */
 @media (max-width: 1200px) {
-  .node-builder-content {
+  .schemas-builder-content {
     grid-template-columns: 1fr 2fr 1fr;
   }
 }
 
 @media (max-width: 900px) {
-  .node-builder-content {
+  .schemas-builder-content {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     gap: 0.5rem;
   }
 
-  .node-library-panel,
-  .node-editor-panel,
-  .node-properties-panel {
+  .schema-library-panel,
+  .schema-editor-panel,
+  .schema-properties-panel {
     min-height: 250px;
   }
 
-  .node-builder-header {
+  .schemas-builder-header {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
   }
 }
 
-
-.header-actions {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.btn-new {
-  padding: 0.6rem 1.2rem;
-  background: #10b981;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn-new:hover {
-  background: #059669;
-}
-
-.btn-danger {
-  padding: 0.6rem 1.2rem;
-  background: #ef4444;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn-danger:hover {
-  background: #dc2626;
-}
-
 /* Темная тема поддержка */
-[data-theme="dark"] .com-node-builder {
+[data-theme="dark"] .com-node-schemas-builder {
   background: #1a1a1a;
 }
 
-[data-theme="dark"] .node-builder-header,
-[data-theme="dark"] .node-library-panel,
-[data-theme="dark"] .node-editor-panel,
-[data-theme="dark"] .node-properties-panel {
+[data-theme="dark"] .schemas-builder-header,
+[data-theme="dark"] .schema-library-panel,
+[data-theme="dark"] .schema-editor-panel,
+[data-theme="dark"] .schema-properties-panel {
   background: #2d2d2d;
   border-color: #404040;
 }
