@@ -26,7 +26,7 @@
                          "c c c c";
 }
 
-.Node_Builder {
+.phi_structure {
     opacity: 0.9;
     display: grid;
     grid-gap: 5px;
@@ -36,8 +36,8 @@
     grid-template-rows: 40px min-content;
     grid-template-areas: "g g g g"
                          "a a a a"
-                         "b b b b"
-                         "c c c c";
+                         "a a a a"
+                         "a a a a";
 }
 
 .Node_Schemas_Builder {
@@ -50,8 +50,8 @@
     grid-template-rows: 40px min-content;
     grid-template-areas: "g g g g"
                          "a a a a"
-                         "b b b b"
-                         "c c c c";
+                         "a a a a"
+                         "a a a a";
 }
 
 .user {
@@ -110,5 +110,5 @@
 
 .PageStructureContainer h2{
     margin-top: 60px;
-    color: #fff;
+    /*color: #fff;*/
 }

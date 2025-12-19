@@ -31,23 +31,19 @@ body[data-page]::after {
 
 /* Фоны для каждой страницы */
 body[data-page="root"]::before {
-  background-image: url('/src/assets/images/backgrounds/root-bg.jpg');
+  background-image: url('@/assets/images/backgrounds/root-bg.jpg');
 }
 
 body[data-page="admin"]::before {
-  background-image: url('/src/assets/images/backgrounds/admin-bg.jpg');
+  background-image: url('@/assets/images/backgrounds/admin-bg.jpg');
 }
 
 body[data-page="user"]::before {
-  background-image: url('/src/assets/images/backgrounds/user-bg.jpg');
+  background-image: url('@/assets/images/backgrounds/user-bg.jpg');
 }
 
-body[data-page="Node_Schemas_Builder"]::before {
-  background-image: url('/src/assets/images/backgrounds/Node_Schemas_Builder_dark_theme.jpeg');
-}
-
-body[data-page="Node_Builder"]::before {
-  background-image: url('/src/assets/images/backgrounds/Node-Builder_dark_theme.jpeg');
+body[data-page="phi_structure"]::before {
+  background-image: url('@/assets/images/backgrounds/Phi_structure_dark_theme.jpeg');
 }
 
 /* Темная прокрутка (для браузеров WebKit) */

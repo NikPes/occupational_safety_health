@@ -1,0 +1,7 @@
+Phi_ts: The Athlete of Light
+A minimalistic, high-performance frontend framework for next-generation WebGL applications.
+Built with TypeScript for unparalleled speed and rendering efficiency.
+
+Phi_ts: The Athlete of Light
+Минималистичный, высокопроизводительный фреймворк для WebGL-приложений нового поколения.
+Разработан на TypeScript для непревзойденной скорости и эффективности рендеринга.

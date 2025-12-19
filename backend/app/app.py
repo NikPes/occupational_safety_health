@@ -4,15 +4,17 @@ from flask_cors import CORS
 from loguru import logger
 
 from config import basedir, JWTConfig, SQLAlchemyMainConfig
-from views.login_views import blu_login
-from views.main_menu_views import blu_main_menu
-from views.use_token_views import blu_use_token
-from views.body_construct_views import blu_body_construct
-from views.table_bd_views import blu_table_bd_views
-from views.node_builder_views import blu_node_builder
-from views.node_schemas_builder_views import blu_node_schemas_builder
-
-
+from backend.app.user.views.login_views import blu_login
+from backend.app.user.views.user_db_views import blu_user_bd_views
+from backend.app.main_menu.views.main_menu_views import blu_main_menu
+from backend.app.base.views.use_token_views import blu_use_token
+from backend.app.base.views.body_construct_views import blu_body_construct
+from backend.app.table.views.table_bd_views import blu_table_bd_views
+from backend.app.table.views.table_bd_edit_views import blu_table_bd_edit
+from backend.app.table.views.table_bd_add_row_views import blu_table_bd_add_row
+from backend.app.dependencies.views.specific_api_views import blu_dependencies
+from backend.app.phi_node.views.phi_socket_views import blu_phi_socket
+from backend.app.phi_node.views.phi_node_views import blu_phi_node
 
 
 def create_app():
@@ -28,14 +30,16 @@ def create_app():
     db.init_app(app)
 
     app.register_blueprint(blu_login, url_prefix='/WorkOST')
+    app.register_blueprint(blu_user_bd_views, url_prefix='/WorkOST/user_bd_views')
     app.register_blueprint(blu_main_menu, url_prefix='/WorkOST/main_menu')
     app.register_blueprint(blu_use_token, url_prefix='/WorkOST/use_token')
     app.register_blueprint(blu_body_construct, url_prefix='/WorkOST/body_construct')
-    app.register_blueprint(blu_table_bd_views, url_prefix='/WorkOST/table_views')
-    app.register_blueprint(blu_node_builder, url_prefix='/WorkOST/node_builder')
-    app.register_blueprint(blu_node_schemas_builder, url_prefix='/WorkOST/node_schemas_builder')
-
-
+    app.register_blueprint(blu_table_bd_views, url_prefix='/WorkOST/table_bd_views')
+    app.register_blueprint(blu_table_bd_edit, url_prefix='/WorkOST/table_bd_edit')
+    app.register_blueprint(blu_table_bd_add_row, url_prefix='/WorkOST/table_bd_add_row')
+    app.register_blueprint(blu_dependencies, url_prefix='/WorkOST/dependencies')
+    app.register_blueprint(blu_phi_socket, url_prefix='/WorkOST/phi_socket')
+    app.register_blueprint(blu_phi_node, url_prefix='/WorkOST/phi_node')
 
     return app
 

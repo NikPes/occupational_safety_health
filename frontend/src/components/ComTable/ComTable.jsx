@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import AddButton from "../AddButton/AddButton";
-import Search from "../Search/Search";
-import TableWithPagination from "../TableWithPagination/TableWithPagination";
+import AddButton from "@/components/ComTable/subcomponents/AddButton/AddButton.jsx";
+import Search from "@/components/ComTable/subcomponents/Search/Search";
+import TableWithPagination from "@/components/ComTable/subcomponents/TableWithPagination/TableWithPagination";
 import axios from "axios";
+import './ComTable.css'
 
 function ComTable({ token, table_name, count_sheet }) {
     const [searchQuery, setSearchQuery] = useState("");
@@ -13,7 +14,7 @@ function ComTable({ token, table_name, count_sheet }) {
     useEffect(() => {
         axios({
             method: "GET",
-            url: "/flaskCuda/working/getNameHead",
+            url: "/WorkOST/table_bd_views/getNameHead",
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -44,7 +45,7 @@ function ComTable({ token, table_name, count_sheet }) {
 
     return (
         <div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
+            <div className="com-table">
                 <AddButton token={token} table_name={table_name} onDataUpdated={handleDataUpdated} />
                 <Search onSearch={handleSearch} />
             </div>
@@ -54,7 +55,8 @@ function ComTable({ token, table_name, count_sheet }) {
                 searchQuery={searchQuery}
                 refreshKey={refreshKey}
                 count_sheet={count_sheet}
-                onDataUpdated={handleDataUpdated} // Передаем обработчик в TableWithPagination
+                columns={columns}
+                onDataUpdated={handleDataUpdated}
             />
         </div>
     );

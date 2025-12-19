@@ -1,0 +1,32 @@
+/* ComPhiStructure.css */
+.phi-editor {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.phi-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.1s ease-out;
+  cursor: grab;
+}
+
+.phi-canvas:active {
+  cursor: grabbing;
+}
+
+.phi-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

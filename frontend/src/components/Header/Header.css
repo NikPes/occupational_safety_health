@@ -7,7 +7,8 @@
 }
 
 .img_overlay {
-  background: rgb(138, 138, 138, 0.8);
+  background: #9dc852;
+  /*background: rgb(157, 200, 82, 0.8);*/
   /*border-radius: 20px;*/
   position: relative;
   width: calc(100% - 20px);

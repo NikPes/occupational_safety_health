@@ -9,9 +9,12 @@ import "./BodyConstruct.css"; // Импортируем стили
  * @property {string} position_tab - Название элемента меню.
  */
 // Импортируем компоненты
-const ComTable = React.lazy(() => import('../ComTable/ComTable.jsx'));
-const ComNodeSchemasBuilder = React.lazy(() => import('../ComNodeSchemasBuilder/ComNodeSchemasBuilder.jsx'));
-const ComNodeBuilder = React.lazy(() => import('../ComNodeBuilder/ComNodeBuilder.jsx'));
+const ComTable = React.lazy(() =>
+    import('@/components/ComTable/ComTable.jsx'));
+const ComPhiStructure = React.lazy(() =>
+ import ('@/components/ComPhiStructure/ComPhiStructure.tsx'));
+// const ComNodeSchemasBuilder = React.lazy(() => import('../ComNodeSchemasBuilder/ComNodeSchemasBuilder.jsx'));
+// const ComNodeBuilder = React.lazy(() => import('../ComNodeBuilder/ComNodeBuilder.jsx'));
 // const ComGraphics = React.lazy(() => import('../ComGraphics/ComGraphics.jsx'));
 // const ComConsole = React.lazy(() => import('../ComConsole/ComConsole.jsx'));
 // const IntelligenceWork = React.lazy(() => import('../IntelligenceWork/IntelligenceWork.jsx'));
@@ -19,8 +22,9 @@ const ComNodeBuilder = React.lazy(() => import('../ComNodeBuilder/ComNodeBuilder
 // Объект-маппинг для компонентов
 const componentsMap = {
     ComTable,
-    ComNodeBuilder,
-    ComNodeSchemasBuilder,
+    ComPhiStructure,
+    // ComPhiNodeBuilder,
+    // ComNodeSchemasBuilder,
     // ComGraphics,
     // ComConsole,
     // IntelligenceWork,
@@ -103,7 +107,6 @@ function BodyConstruct(props) {
             {pageStructure.map((item) => (
                 <div key={item.id} className={item.position_tab}>
                     <div className="PageStructureContainer">
-                        <h2>{item.table_name}</h2>
                         <PageStructureItem item={item}
                                            token={props.token}
                                            table_name={item.table_name}

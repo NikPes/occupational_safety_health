@@ -1,0 +1,120 @@
+/* PhiCanvas/PhiCanvas.css */
+.phi-canvas-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.phi-canvas-container.no-access {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+}
+
+.phi-canvas-message {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.phi-canvas-message h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.phi-canvas-message p {
+  margin: 0;
+  color: #666;
+}
+
+/* ОСНОВНОЙ КОНТЕЙНЕР CANVAS - aspect-ratio 16:7 */
+.phi-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* aspect-ratio гарантирует пропорции 16:7 */
+  aspect-ratio: 16 / 7;
+  /* Минимальные размеры */
+  min-width: 800px;
+  min-height: 350px; /* 800 / (16/7) = 350 */
+  /* Центрирование, если контейнер больше */
+  margin: 0 auto;
+}
+
+/* Принудительное заполнение в режиме fullscreen или фиксированной высоты */
+.phi-canvas-container:has(.phi-canvas-wrapper) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* НОВЫЕ СТИЛИ */
+.phi-canvas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.phi-canvas-overlay > * {
+  pointer-events: auto;
+}
+
+.phi-canvas-loading {
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  color: #333;
+  font-size: 16px;
+}
+
+.phi-canvas-error {
+  padding: 2rem;
+  text-align: center;
+  background: white;
+  border-radius: 8px;
+  color: #c62828;
+  max-width: 400px;
+}
+
+.phi-canvas-error h3 {
+  margin-top: 0;
+  color: #b71c1c;
+}
+
+.phi-canvas-retry {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.phi-canvas-retry:hover {
+  background: #1976d2;
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 800px) {
+  .phi-canvas-wrapper {
+    min-width: 100%;
+    min-height: auto;
+    aspect-ratio: unset;
+    height: auto;
+  }
+}

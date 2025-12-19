@@ -1,0 +1,56 @@
+.search-block-form {
+    width: 248px;
+    height: 28px;
+    float: right;
+    /*margin-bottom: 5px;*/
+    border-radius: 15px;
+    border: #c9c9c9 solid 1px;
+    background: #eeeeee;
+}
+
+.search-block-form input {
+    padding: 0;
+    margin: 0;
+    display: block;
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    height: 100%;
+}
+
+.search-block-form .form-actions {
+    width: 28px;
+    height: 28px;
+    float: left;
+    background: url(searchIconDark.png) 8px 8px no-repeat;
+}
+
+.search-block-form .form-actions input:hover {
+    cursor: pointer;
+}
+
+.search-block-form .form-actions input {
+    overflow: hidden;
+    text-indent: -9999px;
+}
+
+.search-block-form .form-item {
+    width: 210px;
+    padding: 0px 5px;
+    float: right;
+    height: 28px;
+}
+
+.search-block-form .form-item input {
+    font: 13px/16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #111;
+    float: right;
+    height: auto !important;
+    padding: 6px 0;
+}
+
+.inputField {
+    font-size: 14px;
+    padding: 6px 0 6px 6px;
+}
